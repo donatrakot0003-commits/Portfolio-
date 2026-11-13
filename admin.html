@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="color-scheme" content="dark">
+<title>Administration – Donatien</title>
+<style>
+:root{--bg:#0B0B0D;--bg2:#151519;--ink:#F5F3EF;--mute:#A6A6AC;--gold:#D6B77A;--line:#2a2a30;--bad:#e8a0a0;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 system-ui,Inter,sans-serif}
+h1,h2,h3{margin:0 0 .5em;line-height:1.2}h2{font-size:24px}h3{font-size:17px}.mute{color:var(--mute)}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px;max-width:900px;margin:0 auto}
+nav{display:flex;gap:6px;overflow-x:auto;padding:0 16px 10px;max-width:900px;margin:0 auto;scrollbar-width:none}
+button,.b{min-height:44px;padding:8px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);font:600 15px system-ui;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-flex;align-items:center}
+button.on,button.main{background:var(--gold);border-color:var(--gold);color:#0B0B0D}button.bad{color:var(--bad)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 12px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}.g .card{margin:0}.g b{font-size:30px;display:block;color:var(--gold)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+label{display:grid;gap:4px;font-weight:600;font-size:14px;margin:0 0 12px}
+input,select,textarea{font:inherit;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%}
+.chip{display:inline-block;font-size:12px;font-weight:600;border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:1px 10px}
+#st{position:sticky;bottom:0;padding:10px 16px;background:var(--bg2);border-top:1px solid var(--line);min-height:44px}#st.e{color:var(--bad)}
+img.t{width:100%;max-width:220px;border-radius:10px;display:block;margin:8px 0}.gal{display:flex;flex-wrap:wrap;gap:10px}.gal div{width:100px}.gal img{width:100px;height:80px;object-fit:cover;border-radius:8px}
+.lg{max-width:380px;margin:12vh auto 0}
+</style></head><body>
+<div id="lg" class="wrap lg" hidden><h2>Administration</h2><p class="mute">Accès réservé.</p>
+<form id="lf"><label>Adresse e-mail<input id="le" type="email" autocomplete="username" required></label><label>Mot de passe<input id="lp" type="password" autocomplete="current-password" required></label><button class="main" id="lb" type="submit">Se connecter</button></form>
+<p><button id="fg" type="button">Mot de passe oublié</button></p></div>
+<div id="nw" class="wrap lg" hidden><h2>Nouveau mot de passe</h2><form id="nf"><label>Mot de passe (10 caractères minimum)<input id="np" type="password" minlength="10" autocomplete="new-password" required></label><button class="main" type="submit">Enregistrer</button></form></div>
+<div id="app" hidden><header><div class="bar"><b>Tableau de bord</b><span><a class="b" href="./" target="_blank" rel="noopener">Voir le site</a> <button id="lo" type="button">Déconnexion</button></span></div><nav id="nv"></nav></header><main class="wrap" id="mn"></main></div>
+<div id="st" role="status"></div>
+<script>
+var SB="https://swbtuzivbtquaqjocoap.supabase.co",KEY="sb_publishable_h-qM9FeUn7DxfZN6jaS0Bg_2z_7nZkd",S={tok:null,uid:null,aid:null},$=function(i){return document.getElementById(i)};
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function msg(t,e){var s=$("st");s.textContent=t||"";s.className=e?"e":""}
+function slug(x){return String(x||"f").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)||"f"}
+function pub(b,p){return SB+"/storage/v1/object/public/"+b+"/"+p.split("/").map(encodeURIComponent).join("/")}
+async function rq(path,o){o=o||{};var h={apikey:KEY},bl=o.body instanceof Blob;if(S.tok)h.Authorization="Bearer "+S.tok;if(o.body&&!bl)h["Content-Type"]="application/json";Object.assign(h,o.h||{});
+var r=await fetch(SB+path,{method:o.m||"GET",headers:h,body:o.body?(bl?o.body:JSON.stringify(o.body)):undefined});
+if(r.status===401&&!o.retry&&await refresh()){o.retry=1;return rq(path,o)}
+if(!r.ok){var t=await r.text();throw new Error(t||r.status)}return r}
+async function j(p,o){var r=await rq(p,o),t=await r.text();return t?JSON.parse(t):null}
+async function au(b,q){var r=await fetch(SB+"/auth/v1/token?grant_type="+q,{method:"POST",headers:{apikey:KEY,"Content-Type":"application/json"},body:JSON.stringify(b)});return r.ok?r.json():null}
+function sess(d){S.tok=d.access_token;if(d.user)S.uid=d.user.id;try{localStorage.setItem("rt",d.refresh_token)}catch(e){}}
+async function refresh(){var t=null;try{t=localStorage.getItem("rt")}catch(e){}if(!t)return false;var d=await au({refresh_token:t},"refresh_token");if(!d)return false;sess(d);return true}
+function log(a,e,i){j("/rest/v1/audit_log",{m:"POST",body:{admin_id:S.aid,action:a,entity:e,entity_id:String(i||"")},h:{Prefer:"return=minimal"}}).catch(function(){})}
+async function enter(){var a=await j("/rest/v1/admins?select=id&auth_user_id=eq."+S.uid);if(!a||!a.length){msg("Ce compte n’est pas autorisé.",1);out();return}S.aid=a[0].id;
+j("/rest/v1/admins?id=eq."+S.aid,{m:"PATCH",body:{last_login_at:new Date().toISOString()},h:{Prefer:"return=minimal"}}).catch(function(){});log("connexion","admins",S.aid);
+$("lg").hidden=true;$("app").hidden=false;msg("");go("dash")}
+function out(){S.tok=S.aid=S.uid=null;try{localStorage.removeItem("rt")}catch(e){}$("app").hidden=true;$("lg").hidden=false}
+$("lf").onsubmit=async function(e){e.preventDefault();var b=$("lb");b.disabled=true;msg("Connexion…");var d=await au({email:$("le").value.trim(),password:$("lp").value},"password");b.disabled=false;$("lp").value="";
+if(!d){msg("E-mail ou mot de passe incorrect.",1);return}sess(d);try{await enter()}catch(x){msg("Erreur : "+x.message,1)}};
+$("lo").onclick=function(){out();msg("Vous êtes déconnecté.")};
+$("fg").onclick=async function(){var m=$("le").value.trim();if(!m){msg("Entrez d’abord votre e-mail ci-dessus.",1);return}
+await fetch(SB+"/auth/v1/recover",{method:"POST",headers:{apikey:KEY,"Content-Type":"application/json"},body:JSON.stringify({email:m})}).catch(function(){});msg("Si ce compte existe, un e-mail de réinitialisation a été envoyé.")};
+$("nf").onsubmit=async function(e){e.preventDefault();try{await rq("/auth/v1/user",{m:"PUT",body:{password:$("np").value}});history.replaceState(null,"",location.pathname);S.tok=null;$("nw").hidden=true;$("lg").hidden=false;msg("Mot de passe changé. Connectez-vous.")}catch(x){msg("Échec : "+x.message,1)}};
+var NAV=[["dash","Accueil"],["msg","Messages"],["projects","Projets"],["skills","Compétences"],["timeline","Parcours"],["certifications","Certifications"],["profile","Profil"]];
+$("nv").innerHTML=NAV.map(function(n){return'<button type="button" data-v="'+n[0]+'">'+n[1]+'</button>'}).join("");
+$("nv").onclick=function(e){var b=e.target.closest("button");if(b)go(b.dataset.v)};
+function go(v){[].forEach.call($("nv").children,function(b){b.classList.toggle("on",b.dataset.v===v)});msg("");(v==="dash"?dash:v==="msg"?msgs:v==="profile"?prof:list)(v).catch(function(x){msg("Erreur : "+x.message,1)})}
+async function cnt(p){var r=await rq("/rest/v1/"+p+(p.indexOf("?")>0?"&":"?")+"select=id&limit=1",{h:{Prefer:"count=exact"}});var c=r.headers.get("content-range");return c?c.split("/")[1]:"0"}
+async function dash(){var T=await Promise.all([cnt("projects?status=eq.publie"),cnt("skills"),cnt("certifications"),cnt("contact_messages"),cnt("contact_messages?status=eq.nouveau")]),A=await j("/rest/v1/audit_log?select=*&order=created_at.desc&limit=8")||[];
+var L=["Projets publiés","Compétences","Certifications","Messages reçus","Nouveaux messages"];
+$("mn").innerHTML='<h2>Tableau de bord</h2><div class="g">'+T.map(function(v,i){return'<div class="card"><b>'+esc(v)+'</b>'+L[i]+'</div>'}).join("")+'</div><h3>Dernières actions</h3>'+(A.length?A.map(function(a){return'<div class="card mute">'+new Date(a.created_at).toLocaleString("fr-FR")+' · <b>'+esc(a.action)+'</b> · '+esc(a.entity)+'</div>'}).join(""):'<p class="mute">Aucune action enregistrée.</p>')}
+var ST={nouveau:"Nouveau",lu:"Lu",traite:"Traité",archive:"Archivé"},MF="all";
+async function msgs(){var q="/rest/v1/contact_messages?select=*&order=received_at.desc&limit=100"+(MF!=="all"?"&status=eq."+MF:""),R=await j(q)||[];
+$("mn").innerHTML='<h2>Messages</h2><div class="row" style="margin:0 0 14px">'+[["all","Tous"]].concat(Object.keys(ST).map(function(k){return[k,ST[k]]})).map(function(f){return'<button type="button" class="'+(MF===f[0]?"on":"")+'" data-f="'+f[0]+'">'+f[1]+'</button>'}).join("")+'</div>'+(R.length?R.map(function(m){return'<div class="card"><span class="chip">'+ST[m.status]+'</span> <span class="mute">'+new Date(m.received_at).toLocaleString("fr-FR")+'</span><h3>'+esc(m.subject)+'</h3><p class="mute">'+esc(m.sender_name)+' · <a style="color:inherit" href="mailto:'+esc(m.sender_email)+'">'+esc(m.sender_email)+'</a></p><p style="white-space:pre-wrap">'+esc(m.body)+'</p><div class="row">'+["lu","traite","archive"].filter(function(s){return s!==m.status}).map(function(s){return'<button type="button" data-id="'+m.id+'" data-s="'+s+'">'+ST[s]+'</button>'}).join("")+'<button type="button" class="bad" data-d="'+m.id+'">Supprimer</button></div></div>'}).join(""):'<p class="mute">Aucun message.</p>');
+$("mn").onclick=async function(e){var b=e.target.closest("button");if(!b)return;try{if(b.dataset.f){MF=b.dataset.f;return msgs()}
+if(b.dataset.s){await rq("/rest/v1/contact_messages?id=eq."+b.dataset.id,{m:"PATCH",body:{status:b.dataset.s},h:{Prefer:"return=minimal"}});log("modification","contact_messages",b.dataset.id);return msgs()}
+if(b.dataset.d&&confirm("Supprimer ce message définitivement ?")){await rq("/rest/v1/contact_messages?id=eq."+b.dataset.d,{m:"DELETE"});log("suppression","contact_messages",b.dataset.d);msgs()}}catch(x){msg("Erreur : "+x.message,1)}}}
+var CA=[["identite_visuelle","Identité visuelle"],["design_graphique","Design graphique"],["branding","Branding"],["communication_digitale","Communication digitale"]],BO=[["true","Oui"],["false","Non"]];
+var CFG={
+projects:{l:"Projets",o:"sort_order.asc",ti:"name",sub:function(r){return r.status+" · "+r.category},img:"cover_path",gal:1,
+q:[["Publier","status","publie"],["Brouillon","status","brouillon"],["Archiver","status","archive"]],
+f:[["name","Nom du projet","text",0,1],["slug","Identifiant du lien (facultatif)","text"],["category","Catégorie","sel",CA],["nature","Nature","sel",[["concept","Concept"],["projet_personnel","Projet personnel"],["realisation_publiee","Réalisation publiée"]]],["description","Description","area"],["tools","Outils utilisés (séparés par des virgules)","tags"],["external_url","Lien externe","text"],["status","Statut","sel",[["brouillon","Brouillon"],["publie","Publié"],["archive","Archivé"]]],["sort_order","Ordre d’affichage","num"],["cover_path","Image de couverture","file","projects"]]},
+skills:{l:"Compétences",o:"sort_order.asc",ti:"name",sub:function(r){return r.category+(r.level?" · "+r.level:"")+(r.is_active?"":" · inactive")},q:[["Désactiver","is_active",false],["Activer","is_active",true]],
+f:[["name","Compétence","text",0,1],["category","Catégorie","sel",[["design","Design graphique"],["communication","Communication digitale"],["informatique","Informatique et outils"],["ia","Intelligence artificielle"]]],["level","Niveau","sel",[["","Non précisé"],["bases","Bases"],["pratique","Pratiqué"],["en_apprentissage","En apprentissage"],["avance","Avancé"]]],["description","Description","area"],["practice_period","Période de pratique","text"],["sort_order","Ordre d’affichage","num"],["is_active","Affichée sur le site","bsel",BO]]},
+timeline:{l:"Parcours",o:"sort_order.asc",ti:"title",sub:function(r){return r.kind+" · "+(r.start_date||"")},
+f:[["title","Intitulé","text",0,1],["organization","Établissement ou organisation","text"],["description","Description","area"],["kind","Type","sel",[["formation","Formation"],["stage","Stage"],["experience","Expérience"],["autodidacte","Autodidacte"],["certification","Certification"]]],["start_date","Date de début","date"],["end_date","Date de fin","date"],["sort_order","Ordre d’affichage","num"]]},
+certifications:{l:"Certifications",o:"obtained_on.desc",ti:"name",sub:function(r){return r.issuer+" · "+(r.is_published?"publiée":"masquée")},q:[["Publier","is_published",true],["Masquer","is_published",false]],
+f:[["name","Nom","text",0,1],["issuer","Organisme","text",0,1],["obtained_on","Date d’obtention","date"],["duration_hours","Durée (heures)","num"],["result","Résultat","text"],["reference_number","Numéro de référence","text"],["verify_url","Lien de vérification","text"],["is_published","Affichée sur le site","bsel",BO],["document_path","Document (PDF ou image)","file","documents"]]}};
+var PF=[["full_name","Nom complet","text"],["job_title","Titre professionnel","text"],["intro","Phrase de présentation (affichée en page d’accueil)","area"],["biography","Biographie","area"],["email","E-mail","text"],["phone","Téléphone","text"],["whatsapp","WhatsApp","text"],["facebook_url","Facebook","text"],["linkedin_url","LinkedIn","text"],["photo_path","Photo de profil","file","projects"]];
+async function list(k){var c=CFG[k],R=await j("/rest/v1/"+k+"?select=*&order="+c.o)||[];
+$("mn").innerHTML='<h2>'+c.l+'</h2><button class="main" type="button" data-n="1">Ajouter</button><div style="height:14px"></div>'+(R.length?R.map(function(r){return'<div class="card">'+(c.img&&r[c.img]?'<img class="t" alt="" src="'+esc(pub("projects",r[c.img]))+'">':'')+'<h3>'+esc(r[c.ti])+'</h3><p class="mute" style="margin:0">'+esc(c.sub(r))+'</p><div class="row"><button type="button" data-e="'+r.id+'">Modifier</button>'+(c.q||[]).filter(function(a){return r[a[1]]!==a[2]}).map(function(a,i){return'<button type="button" data-q="'+r.id+'" data-i="'+c.q.indexOf(a)+'">'+a[0]+'</button>'}).join("")+'<button type="button" class="bad" data-d="'+r.id+'">Supprimer</button></div></div>'}).join(""):'<p class="mute">Rien pour le moment.</p>');
+$("mn").onclick=async function(e){var b=e.target.closest("button");if(!b)return;try{var id=b.dataset.e||b.dataset.q||b.dataset.d,row=R.filter(function(r){return r.id===id})[0];
+if(b.dataset.n)return form(k,null);if(b.dataset.e)return form(k,row);
+if(b.dataset.q){var a=c.q[b.dataset.i],o={};o[a[1]]=a[2];await rq("/rest/v1/"+k+"?id=eq."+id,{m:"PATCH",body:o,h:{Prefer:"return=minimal"}});log(a[2]===true||a[2]==="publie"?"publication":"modification",k,id);return list(k)}
+if(b.dataset.d&&confirm("Supprimer « "+row[c.ti]+" » ? Cette action est définitive.")){await del(k,row);list(k)}}catch(x){msg("Erreur : "+x.message,1)}}}
+async function delF(b,p){if(p)await rq("/storage/v1/object/"+b+"/"+p,{m:"DELETE"}).catch(function(){})}
+async function del(k,row){var c=CFG[k];if(c.gal){var G=await j("/rest/v1/project_images?select=file_path&project_id=eq."+row.id)||[];for(var g of G)await delF("projects",g.file_path)}
+for(var f of c.f)if(f[2]==="file")await delF(f[3],row[f[0]]);await rq("/rest/v1/"+k+"?id=eq."+row.id,{m:"DELETE"});log("suppression",k,row.id);msg("Supprimé.")}
+function comp(f){return new Promise(function(ok,ko){var im=new Image();im.onload=function(){var s=Math.min(1,1600/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);c.toBlob(function(b){b?ok(b):ko(new Error("Compression impossible"))},"image/webp",.82)};im.onerror=function(){ko(new Error("Image illisible"))};im.src=URL.createObjectURL(f)})}
+async function up(bucket,file,base){var b=file,ext="pdf";if(/^image\//.test(file.type)){b=await comp(file);ext="webp"}else if(file.type!=="application/pdf")throw new Error("Format non autorisé (image ou PDF)");
+if(b.size>(bucket==="projects"?5:10)*1048576)throw new Error("Fichier trop lourd");var p=slug(base)+"-"+Date.now()+"."+ext;await rq("/storage/v1/object/"+bucket+"/"+p,{m:"POST",body:b,h:{"Content-Type":b.type}});return p}
+function fld(f,v){var k=f[0],t=f[2],id="f_"+k,h='<label for="'+id+'">'+f[1]+(f[4]?" *":"")+'</label>',x=v==null?"":v;
+if(t==="area")return h+'<textarea id="'+id+'" rows="4">'+esc(x)+'</textarea>';
+if(t==="sel"||t==="bsel")return h+'<select id="'+id+'">'+f[3].map(function(o){return'<option value="'+o[0]+'"'+(String(x)===o[0]?" selected":"")+'>'+o[1]+'</option>'}).join("")+'</select>';
+if(t==="tags")return h+'<input id="'+id+'" value="'+esc((v||[]).join(", "))+'">';
+if(t==="file")return h+(v?'<span class="mute">Fichier actuel : '+esc(v)+'</span>':'')+'<input id="'+id+'" type="file" accept="'+(f[3]==="documents"?"application/pdf,image/*":"image/*")+'"><img class="t" id="p_'+k+'" alt="" hidden>';
+return h+'<input id="'+id+'" type="'+(t==="num"?"number":t==="date"?"date":"text")+'" value="'+esc(x)+'">'}
+async function form(k,row,pf){var c=pf?{f:PF}:CFG[k],F=c.f;
+$("mn").innerHTML='<h2>'+(pf?"Profil":row?"Modifier":"Ajouter")+'</h2><form id="ef">'+F.map(function(f){return fld(f,row?row[f[0]]:(f[0]==="sort_order"?0:null))}).join("")+'<div class="row"><button class="main" type="submit">Enregistrer</button>'+(pf?"":'<button type="button" id="cn">Annuler</button>')+'</div></form><div id="gl"></div>';
+if(!pf)$("cn").onclick=function(){go(k)};
+F.forEach(function(f){if(f[2]==="file")$("f_"+f[0]).onchange=function(e){var p=$("p_"+f[0]),fl=e.target.files[0];if(fl&&/^image\//.test(fl.type)){p.src=URL.createObjectURL(fl);p.hidden=false}else p.hidden=true}});
+if(c.gal&&row)gallery(row);
+$("ef").onsubmit=async function(e){e.preventDefault();var btn=e.target.querySelector(".main");btn.disabled=true;msg("Enregistrement…");try{var d={};
+for(var f of F){var kk=f[0],t=f[2],el=$("f_"+kk),v;
+if(t==="file"){var fl=el.files[0];if(!fl)continue;v=await up(f[3],fl,d.slug||d.name||d.full_name||d.title||kk);if(row&&row[kk])await delF(f[3],row[kk])}
+else{v=el.value.trim();if(f[4]&&!v)throw new Error("Le champ « "+f[1]+" » est obligatoire.");
+if(t==="tags")v=v.split(",").map(function(s){return s.trim()}).filter(Boolean);else if(t==="num")v=Number(v||0);else if(t==="bsel")v=v==="true";else if(v==="")v=null}
+d[kk]=v}
+if(k==="projects"&&!d.slug)d.slug=slug(d.name);
+if(pf){await rq("/rest/v1/profile?id=eq.1",{m:"PATCH",body:d,h:{Prefer:"return=minimal"}});log("modification","profile",1);msg("Profil enregistré.");return go("profile")}
+if(row){await rq("/rest/v1/"+k+"?id=eq."+row.id,{m:"PATCH",body:d,h:{Prefer:"return=minimal"}});log("modification",k,row.id);msg("Modifications enregistrées.");if(c.gal){var r2=await j("/rest/v1/"+k+"?select=*&id=eq."+row.id);return form(k,r2[0])}return go(k)}
+var n=await j("/rest/v1/"+k,{m:"POST",body:d,h:{Prefer:"return=representation"}});log("creation",k,n[0].id);msg("Ajouté.");if(c.gal)return form(k,n[0]);go(k)}catch(x){msg("Erreur : "+x.message,1)}finally{btn.disabled=false}}}
+async function prof(){var r=await j("/rest/v1/profile?select=*&id=eq.1");form("profile",r&&r[0]||{},1)}
+async function gallery(row){var G=await j("/rest/v1/project_images?select=*&project_id=eq."+row.id+"&order=sort_order")||[];
+$("gl").innerHTML='<h3 style="margin-top:24px">Galerie</h3><div class="gal">'+G.map(function(g){return'<div><img alt="" src="'+esc(pub("projects",g.file_path))+'"><button type="button" class="bad" data-g="'+g.id+'">Retirer</button></div>'}).join("")+'</div><label style="margin-top:12px">Ajouter des images<input id="gi" type="file" accept="image/*" multiple></label>';
+$("gi").onchange=async function(e){var fs=[].slice.call(e.target.files);try{for(var i=0;i<fs.length;i++){msg("Import "+(i+1)+"/"+fs.length+"…");var p=await up("projects",fs[i],row.slug+"-g");await rq("/rest/v1/project_images",{m:"POST",body:{project_id:row.id,file_path:p,alt_text:row.name,sort_order:G.length+i},h:{Prefer:"return=minimal"}})}log("modification","project_images",row.id);msg("Images ajoutées.");gallery(row)}catch(x){msg("Erreur : "+x.message,1)}};
+$("gl").onclick=async function(e){var b=e.target.closest("[data-g]");if(!b||!confirm("Retirer cette image ?"))return;var g=G.filter(function(z){return z.id===b.dataset.g})[0];try{await delF("projects",g.file_path);await rq("/rest/v1/project_images?id=eq."+g.id,{m:"DELETE"});log("suppression","project_images",g.id);gallery(row)}catch(x){msg("Erreur : "+x.message,1)}}}
+(async function(){var h=location.hash;if(/type=recovery/.test(h)){var m=h.match(/access_token=([^&]+)/);if(m){S.tok=m[1];$("nw").hidden=false;return}}
+try{if(await refresh()){await enter();return}}catch(x){}$("lg").hidden=false})();
+</script></body></html>
