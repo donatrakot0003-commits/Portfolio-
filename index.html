@@ -8,13 +8,13 @@
 <title>DONAT – Donatien Rakotozandry, designer graphique et créateur numérique à Fianarantsoa</title>
 <meta name="description" content="DONAT, portfolio de Donatien Rakotozandry, designer graphique autodidacte à Fianarantsoa, Madagascar : identité visuelle, branding, communication digitale et intelligence artificielle.">
 <link rel="canonical" href="https://donatrakot0003-commits.github.io/Portfolio-/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314243A'/%3E%3Ctext x='32' y='44' font-family='Arial' font-weight='800' font-size='38' text-anchor='middle' fill='%23C9A66B'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="DONAT">
 <meta property="og:title" content="DONAT – Creativity Meets Technology">
 <meta property="og:description" content="Identité visuelle, branding, communication digitale et IA. Donatien Rakotozandry, Fianarantsoa, Madagascar.">
 <meta property="og:url" content="https://donatrakot0003-commits.github.io/Portfolio-/">
-<meta property="og:image" content="https://donatrakot0003-commits.github.io/Portfolio-/photo.jpg">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://donatrakot0003-commits.github.io/Portfolio-/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="DONAT, Creativity Meets Technology, Donatien Rakotozandry">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="DONAT – Creativity Meets Technology"><meta name="twitter:image" content="https://donatrakot0003-commits.github.io/Portfolio-/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Donatien Rakotozandry","alternateName":"DONAT","jobTitle":"Designer graphique","description":"Designer graphique autodidacte, créateur numérique et passionné d’intelligence artificielle.","url":"https://donatrakot0003-commits.github.io/Portfolio-/","image":"https://donatrakot0003-commits.github.io/Portfolio-/photo.jpg","address":{"@type":"PostalAddress","addressLocality":"Fianarantsoa","addressCountry":"MG"},"sameAs":["https://www.linkedin.com/in/donatien-rakotozandry-606988449","https://www.facebook.com/profile.php?id=61594011117020"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Manrope:wght@600;800&display=swap" rel="stylesheet">
@@ -80,11 +80,19 @@ dialog{max-width:520px;width:calc(100% - 32px);background:var(--navy);color:var(
 @media(max-width:759px){header .wrap{gap:8px}.logo{margin-right:auto}.mb,.hc{display:inline-flex;align-items:center;justify-content:center}nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--navy);border-bottom:1px solid var(--line);padding:6px 22px 14px}nav.open{display:flex}nav a{padding:14px 4px;font-size:17px;border-bottom:1px solid var(--line)}nav a::after{display:none}nav a.on{color:var(--gold)}}
 @media(min-width:760px){.hg{grid-template-columns:1.4fr 1fr}.cg{grid-template-columns:1fr 1fr}nav{gap:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hg{animation:none}nav a::after{transition:none}}
+.pc{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;animation:in .45s ease-out both;transition:transform .25s,border-color .25s}
+.pimg{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;overflow:hidden;color:inherit;font:inherit}
+.pimg .slot,.pimg img.slot{margin:0;border:0;border-radius:0;background:var(--field);transition:transform .5s ease}
+.pb{display:flex;flex-direction:column;flex:1;padding:22px}.pb .btn{margin-top:auto;align-self:flex-start;min-height:44px;padding:8px 20px}.pb p{font-size:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.tools{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0 0 18px}.tools li{font-size:13px;color:var(--mute);border:1px solid var(--line);border-radius:6px;padding:2px 9px}
+.btn{transition:transform .2s,background-color .2s}
+@media(hover:hover){.pc:hover{transform:translateY(-4px);border-color:var(--gold)}.pc:hover .pimg .slot{transform:scale(1.04)}.btn:hover{transform:translateY(-1px)}.btn.main:hover{background:#D6B77A}}
+@media(prefers-reduced-motion:reduce){.pc,.pimg .slot,.btn{animation:none;transition:none}}
 </style>
 </head>
 <body>
 <header><div class="wrap"><a class="logo" href="#accueil" aria-label="DONAT, retour à l’accueil">DONAT</a><a class="btn main hc" href="#contact">Contact</a><button id="mb" class="mb" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">☰</button>
-<nav id="nav" aria-label="Navigation principale"><a href="#apropos">À propos</a><a href="#competences">Compétences</a><a href="#parcours">Parcours</a><a href="#portfolio">Portfolio</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a></nav></div></header>
+<nav id="nav" aria-label="Navigation principale"><a href="#apropos">À propos</a><a href="#competences">Compétences</a><a href="#parcours">Parcours</a><a href="#portfolio">Portfolio</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a><a href="admin.html" rel="nofollow">Espace Admin</a></nav></div></header>
 <main>
 <section class="hero" id="accueil"><div class="wrap"><div class="hg"><div>
 <h1>Creativity Meets Technology</h1>
@@ -149,7 +157,7 @@ dialog{max-width:520px;width:calc(100% - 32px);background:var(--navy);color:var(
 <form id="cf" novalidate><label>Nom<input name="n" autocomplete="name" maxlength="100"><span class="er"></span></label><label>Adresse e-mail<input name="e" type="email" autocomplete="email" inputmode="email" maxlength="254"><span class="er"></span></label><label>Sujet<input name="s" maxlength="150"><span class="er"></span></label><label>Message<textarea name="m" rows="5" maxlength="3000"></textarea><span class="er"></span></label><input name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><button class="btn main" id="sb" type="submit">Discutons de votre projet</button><p id="fs" role="status" class="mute"></p></form>
 </div></div></section>
 </main>
-<footer><div class="wrap"><p class="sig">Creativity Meets Technology</p><p>DONAT, Donatien Rakotozandry, Fianarantsoa, Madagascar. Apprendre. Créer. Innover. Évoluer.</p><p><a href="admin.html" rel="nofollow">Espace administrateur</a></p></div></footer>
+<footer><div class="wrap"><p class="sig">Creativity Meets Technology</p><p>DONAT, Donatien Rakotozandry, Fianarantsoa, Madagascar. Apprendre. Créer. Innover. Évoluer.</p></div></footer>
 <button id="top" aria-label="Retour en haut" type="button">↑</button>
 <dialog id="dlg"><h3 id="dt"></h3><span class="tag" id="ds"></span><p class="mute" id="dd"></p><ul id="dg"></ul><div id="gal"></div><a id="du" class="btn main" hidden target="_blank" rel="noopener">Voir le projet</a><div class="btns"><button class="btn" id="dx" type="button">Fermer</button></div></dialog>
 
@@ -159,11 +167,12 @@ var P=[
 {t:"TEAM 305",c:"Branding",s:"Concept",d:"Marque de vêtements inspirée de l’identité locale d’Ambohimahasoa.",g:["Développer une identité de marque","Concevoir des modèles de T-shirts et des logos","Bâtir une présence commerciale sur Facebook"]},
 {t:"DR Creative Studio",c:"Branding",s:"Concept de marque personnelle",d:"Univers de marque pour présenter mes créations en design graphique.",g:["Présenter mes créations","Construire mon image professionnelle","Proposer progressivement des services de design"]},
 {t:"Messinah Raya Business",c:"Communication digitale",s:"Réalisation publiée",d:"Contenus pour une page Facebook de friperie et d’articles de décoration.",g:["Publications et textes publicitaires","Présentation des nouveaux arrivages","Relation client et visibilité de la page"]}];
-var F=["Tous","Identité visuelle","Design graphique","Branding","Communication digitale"],box=document.getElementById("projects"),fb=document.querySelector(".filters"),cur="Tous";
+var box=document.getElementById("projects"),fb=document.querySelector(".filters"),cur="Tous";
 function esc(x){return x.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
-function draw(){var l=P.filter(function(p){return cur==="Tous"||p.c===cur});
-box.innerHTML=l.length?l.map(function(p){return '<article class="card">'+(p.i?'<img class="slot" loading="lazy" alt="Visuel du projet '+esc(p.t)+'" src="'+esc(p.i)+'">':'<div class="slot">Visuel à venir</div>')+'<span class="tag'+(p.s==="Réalisation publiée"?"":" l")+'">'+esc(p.s)+'</span><h3>'+esc(p.t)+'</h3><p class="mute">'+esc(p.c)+'. '+esc(p.d)+'</p><button class="btn" type="button" data-i="'+P.indexOf(p)+'" style="min-height:44px;padding:8px 20px">Découvrir le projet</button></article>'}).join(""):'<div class="empty">Aucun projet dans cette catégorie pour le moment. De nouvelles réalisations seront ajoutées au fil de mon apprentissage.</div>';
-fb.innerHTML=F.map(function(f){return '<button type="button" aria-pressed="'+(f===cur)+'" data-f="'+esc(f)+'">'+esc(f)+'</button>'}).join("")}
+function draw(){var cs=[];P.forEach(function(p){if(cs.indexOf(p.c)<0)cs.push(p.c)});if(cur!=="Tous"&&cs.indexOf(cur)<0)cur="Tous";
+var l=P.filter(function(p){return cur==="Tous"||p.c===cur});
+box.innerHTML=l.length?l.map(function(p){var i=P.indexOf(p);return '<article class="pc"><button type="button" class="pimg" data-i="'+i+'" aria-label="Découvrir le projet '+esc(p.t)+'">'+(p.i?'<img class="slot" loading="lazy" decoding="async" alt="Visuel du projet '+esc(p.t)+'" src="'+esc(p.i)+'">':'<div class="slot">Visuel à venir</div>')+'</button><div class="pb">'+(p.s?'<span class="tag'+(p.s==="Réalisation publiée"?"":" l")+'">'+esc(p.s)+'</span>':'')+'<h3>'+esc(p.t)+'</h3><p class="mute">'+esc(p.c)+'. '+esc(p.d)+'</p>'+((p.o&&p.o.length)?'<ul class="tools">'+p.o.map(function(t){return"<li>"+esc(t)+"</li>"}).join("")+'</ul>':'')+'<button class="btn" type="button" data-i="'+i+'">Découvrir le projet</button></div></article>'}).join(""):'<div class="empty">Aucun projet dans cette catégorie pour le moment. De nouvelles réalisations seront ajoutées au fil de mon apprentissage.</div>';
+fb.innerHTML=(cs.length>1?["Tous"].concat(cs):[]).map(function(f){var n=f==="Tous"?P.length:P.filter(function(p){return p.c===f}).length;return '<button type="button" aria-pressed="'+(f===cur)+'" data-f="'+esc(f)+'">'+esc(f)+' ('+n+')</button>'}).join("")}
 draw();
 fb.onclick=function(e){var b=e.target.closest("button");if(b){cur=b.dataset.f;draw()}};
 var dlg=document.getElementById("dlg");
@@ -190,6 +199,7 @@ var SB_URL="https://swbtuzivbtquaqjocoap.supabase.co",SB_KEY="sb_publishable_h-q
 function api(p,o){o=o||{};return fetch(SB_URL+"/rest/v1/"+p,{method:o.method||"GET",headers:Object.assign({apikey:SB_KEY,"Content-Type":"application/json"},o.headers||{}),body:o.body})}
 function pub(b,p){return SB_URL+"/storage/v1/object/public/"+b+"/"+p.split("/").map(encodeURIComponent).join("/")}
 function safe(u){return /^https?:\/\//.test(u||"")?u:""}
+(function(){try{if(navigator.doNotTrack==="1"||sessionStorage.getItem("pv"))return;sessionStorage.setItem("pv","1");var v=localStorage.getItem("vid");if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("vid",v)}var rf="";try{rf=document.referrer?new URL(document.referrer).hostname.slice(0,100):""}catch(e){}if(rf===location.hostname)rf="";api("page_views",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({path:"/",referrer:rf||null,device:/Mobi|Android|iPhone/i.test(navigator.userAgent)?"mobile":"desktop",visitor:v})}).catch(function(){})}catch(e){}})();
 (async function(){
 function q(p){return api(p).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]})}
 var R=await Promise.all([q("profile?select=intro&limit=1"),q("skills?select=*&is_active=eq.true&order=sort_order"),q("timeline_entries?select=*&order=sort_order"),q("projects?select=*&status=eq.publie&order=sort_order"),q("project_images?select=*&order=sort_order"),q("certifications?select=*&is_published=eq.true&order=obtained_on.desc")]);
@@ -201,7 +211,7 @@ document.querySelector("#competences .grid").innerHTML=Object.keys(CAT).filter(f
 if(tl.length){var KD={formation:"Formation",stage:"Stage",experience:"Expérience",autodidacte:"Autodidacte",certification:"Certification"};
 document.querySelector("#parcours .tl").innerHTML=tl.map(function(x){var a=x.start_date&&x.start_date.slice(0,4),b=x.end_date&&x.end_date.slice(0,4),l=a?(b?(a===b?a:a+"–"+b):"Depuis "+a):KD[x.kind]||"";return '<li><b>'+esc(l)+'</b><h3>'+esc(x.title)+'</h3><p>'+esc([x.organization,x.description].filter(Boolean).join(". "))+'</p></li>'}).join("")}
 if(pj.length){var C2={identite_visuelle:"Identité visuelle",design_graphique:"Design graphique",branding:"Branding",communication_digitale:"Communication digitale"},N2={concept:"Concept",projet_personnel:"Projet personnel",realisation_publiee:"Réalisation publiée"};
-P=pj.map(function(x){return{t:x.name,c:C2[x.category]||x.category,s:N2[x.nature]||"",d:x.description||"",g:(x.tools||[]).map(function(t){return"Outil : "+t}),i:x.cover_path?pub("projects",x.cover_path):"",u:safe(x.external_url),gal:im.filter(function(y){return y.project_id===x.id}).map(function(y){return{u:pub("projects",y.file_path),a:y.alt_text||x.name}})}});draw()}
+P=pj.map(function(x){return{t:x.name,c:C2[x.category]||x.category,s:N2[x.nature]||"",d:x.description||"",o:x.tools||[],g:(x.tools||[]).map(function(t){return"Outil : "+t}),i:x.cover_path?pub("projects",x.cover_path):"",u:safe(x.external_url),gal:im.filter(function(y){return y.project_id===x.id}).map(function(y){return{u:pub("projects",y.file_path),a:y.alt_text||x.name}})}});draw()}
 if(ce.length){document.querySelector("#certifications .wrap").innerHTML='<h2>Certifications</h2>'+ce.map(function(x){var d=x.obtained_on?new Date(x.obtained_on).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}):"";var rows=[["Organisme",x.issuer],["Durée",x.duration_hours?x.duration_hours+" heures":""],["Résultat",x.result],["Date",d],["Référence",x.reference_number]].filter(function(r){return r[1]}).map(function(r){return'<dt>'+r[0]+'</dt><dd>'+esc(String(r[1]))+'</dd>'}).join("");return'<div class="card cert" style="max-width:640px;margin-bottom:18px"><h3>'+esc(x.name)+'</h3><dl>'+rows+'</dl><div class="btns" style="margin:0">'+(safe(x.verify_url)?'<a class="btn main" href="'+esc(safe(x.verify_url))+'" target="_blank" rel="noopener">Vérifier l’attestation</a>':'')+(x.document_path?'<a class="btn" href="'+esc(pub("documents",x.document_path))+'" target="_blank" rel="noopener">Consulter le document</a>':'')+'</div></div>'}).join("")}
 })();
 </script>
