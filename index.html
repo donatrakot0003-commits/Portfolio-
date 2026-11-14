@@ -88,11 +88,34 @@ dialog{max-width:520px;width:calc(100% - 32px);background:var(--navy);color:var(
 .btn{transition:transform .2s,background-color .2s}
 @media(hover:hover){.pc:hover{transform:translateY(-4px);border-color:var(--gold)}.pc:hover .pimg .slot{transform:scale(1.04)}.btn:hover{transform:translateY(-1px)}.btn.main:hover{background:#D6B77A}}
 @media(prefers-reduced-motion:reduce){.pc,.pimg .slot,.btn{animation:none;transition:none}}
+.ic{width:1.2em;height:1.2em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;transition:transform .2s}
+nav a{display:inline-flex;align-items:center;gap:7px}nav .ic{width:17px;height:17px;opacity:.85}
+.cl a{display:flex;align-items:center;gap:14px}.cl .ic{width:22px;height:22px;color:var(--accent)}
+.brand{display:flex;align-items:center;gap:20px;margin:0 0 36px}.brand h3{margin:0 0 4px}.brand p{margin:0;max-width:420px}
+.brand img{width:clamp(96px,26vw,132px);height:clamp(96px,26vw,132px);object-fit:cover;border-radius:24px;border:1.5px solid var(--gold);background:var(--navy);flex:none}
+.dt{font-size:14px;margin-left:8px}dialog{max-height:calc(100dvh - 32px);overflow:auto}#dc{width:100%;border-radius:12px;margin-bottom:16px;cursor:zoom-in}#gal img{cursor:zoom-in}
+#lb{max-width:min(96vw,1100px);padding:10px;background:var(--navy)}#lbi{display:block;max-width:100%;max-height:calc(100dvh - 60px);margin:auto;border-radius:10px;cursor:zoom-out}
+@media(min-width:760px){nav a{font-size:14px;padding:12px 8px}nav a::after{left:8px;right:8px}}
+@media(hover:hover){nav a:hover .ic,.cl a:hover .ic{transform:scale(1.12)}}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.2 8.6c0 3.2 2.9 6.2 6.2 6.2l1.2-1.6-2.1-1.1-.9.9c-1-.4-1.9-1.3-2.3-2.3l.9-.9-1.1-2.1z"/></symbol>
+<symbol id="i-fb" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+<symbol id="i-in" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></symbol>
+</defs></svg>
 <header><div class="wrap"><a class="logo" href="#accueil" aria-label="DONAT, retour à l’accueil">DONAT</a><a class="btn main hc" href="#contact">Contact</a><button id="mb" class="mb" type="button" aria-expanded="false" aria-controls="nav" aria-label="Ouvrir le menu">☰</button>
-<nav id="nav" aria-label="Navigation principale"><a href="#apropos">À propos</a><a href="#competences">Compétences</a><a href="#parcours">Parcours</a><a href="#portfolio">Portfolio</a><a href="#certifications">Certifications</a><a href="#contact">Contact</a><a href="admin.html" rel="nofollow">Espace Admin</a></nav></div></header>
+<nav id="nav" aria-label="Navigation principale"><a href="#accueil"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg>Accueil</a><a href="#apropos"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>À propos</a><a href="#competences"><svg class="ic" aria-hidden="true"><use href="#i-tools"/></svg>Compétences</a><a href="#parcours"><svg class="ic" aria-hidden="true"><use href="#i-cap"/></svg>Parcours</a><a href="#portfolio"><svg class="ic" aria-hidden="true"><use href="#i-image"/></svg>Portfolio</a><a href="#certifications"><svg class="ic" aria-hidden="true"><use href="#i-award"/></svg>Certifications</a><a href="#contact"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg>Contact</a><a href="admin.html" rel="nofollow"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Espace Admin</a></nav></div></header>
 <main>
 <section class="hero" id="accueil"><div class="wrap"><div class="hg"><div>
 <h1>Creativity Meets Technology</h1>
@@ -133,6 +156,7 @@ dialog{max-width:520px;width:calc(100% - 32px);background:var(--navy);color:var(
 
 <section id="portfolio"><div class="wrap">
 <h2>Portfolio</h2>
+<div class="brand"><img id="bimg" src="favicon.svg" alt="Logo DONAT" width="132" height="132" decoding="async"><div><h3>DONAT</h3><p class="mute">Creativity Meets Technology, l’image de marque qui signe chacune de mes créations.</p></div></div>
 <div class="filters" role="group" aria-label="Filtrer les projets"></div>
 <div class="grid" id="projects"></div>
 </div></section>
@@ -148,39 +172,46 @@ dialog{max-width:520px;width:calc(100% - 32px);background:var(--navy);color:var(
 <div class="cg"><div>
 <p class="mute">Un logo, des visuels, une page à animer : écrivez-moi, je réponds avec plaisir.</p>
 <div class="cl">
-<a href="mailto:donat.rakot0003@gmail.com?subject=Discutons%20de%20votre%20projet">donat.rakot0003@gmail.com<small>E-mail</small></a>
-<a href="tel:+261381067507">038 10 675 07<small>Téléphone</small></a>
-<a href="https://wa.me/261381067507" target="_blank" rel="noopener">WhatsApp<small>038 10 675 07</small></a>
-<a href="https://www.facebook.com/profile.php?id=61594011117020" target="_blank" rel="noopener">Facebook<small>Page de Donatien</small></a>
-<a href="https://www.linkedin.com/in/donatien-rakotozandry-606988449" target="_blank" rel="noopener">LinkedIn<small>Profil professionnel</small></a></div>
-<a class="btn" href="CV_Donatien_Rakotozandry_2026.pdf" download>Télécharger mon CV</a></div>
+<a data-c="email" href="mailto:donat.rakot0003@gmail.com?subject=Discutons%20de%20votre%20projet"><svg class="ic" aria-hidden="true"><use href="#i-mail"/></svg><span><span class="t">donat.rakot0003@gmail.com</span><small>E-mail</small></span></a>
+<a data-c="phone" href="tel:+261381067507"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg><span><span class="t">038 10 675 07</span><small>Téléphone</small></span></a>
+<a data-c="whatsapp" href="https://wa.me/261381067507" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg><span><span class="t">WhatsApp</span><small>038 10 675 07</small></span></a>
+<a data-c="facebook" href="https://www.facebook.com/profile.php?id=61594011117020" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-fb"/></svg><span><span class="t">Facebook</span><small>Page de Donatien</small></span></a>
+<a data-c="linkedin" href="https://www.linkedin.com/in/donatien-rakotozandry-606988449" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-in"/></svg><span><span class="t">LinkedIn</span><small>Profil professionnel</small></span></a></div>
+<a class="btn" id="cv" href="CV_Donatien_Rakotozandry_2026.pdf" download>Télécharger mon CV</a></div>
 <form id="cf" novalidate><label>Nom<input name="n" autocomplete="name" maxlength="100"><span class="er"></span></label><label>Adresse e-mail<input name="e" type="email" autocomplete="email" inputmode="email" maxlength="254"><span class="er"></span></label><label>Sujet<input name="s" maxlength="150"><span class="er"></span></label><label>Message<textarea name="m" rows="5" maxlength="3000"></textarea><span class="er"></span></label><input name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><button class="btn main" id="sb" type="submit">Discutons de votre projet</button><p id="fs" role="status" class="mute"></p></form>
 </div></div></section>
 </main>
 <footer><div class="wrap"><p class="sig">Creativity Meets Technology</p><p>DONAT, Donatien Rakotozandry, Fianarantsoa, Madagascar. Apprendre. Créer. Innover. Évoluer.</p></div></footer>
 <button id="top" aria-label="Retour en haut" type="button">↑</button>
-<dialog id="dlg"><h3 id="dt"></h3><span class="tag" id="ds"></span><p class="mute" id="dd"></p><ul id="dg"></ul><div id="gal"></div><a id="du" class="btn main" hidden target="_blank" rel="noopener">Voir le projet</a><div class="btns"><button class="btn" id="dx" type="button">Fermer</button></div></dialog>
+<dialog id="dlg"><img id="dc" alt="" hidden><h3 id="dt"></h3><span class="tag" id="ds"></span><p class="mute" id="dd"></p><ul id="dg"></ul><div id="gal"></div><a id="du" class="btn main" hidden target="_blank" rel="noopener">Voir le projet</a><div class="btns"><button class="btn" id="dp" type="button" aria-label="Projet précédent">← Précédent</button><button class="btn" id="dn" type="button" aria-label="Projet suivant">Suivant →</button><button class="btn" id="dx" type="button">Fermer</button></div></dialog>
+<dialog id="lb" aria-label="Image agrandie"><img id="lbi" alt=""></dialog>
 
 <script>
 var P=[
-{t:"Radio Feon’Ilanjana",c:"Identité visuelle",s:"Projet personnel",d:"Identité visuelle d’une radio locale inspirée de la culture Betsileo.",g:["Valoriser la culture locale et les actualités rurales","Évoquer la montagne Ilanjana","Créer une identité simple, élégante et reconnaissable"]},
+{t:"Radio Feon’Ilanjana",c:"Logos & Identité visuelle",s:"Projet personnel",d:"Identité visuelle d’une radio locale inspirée de la culture Betsileo.",g:["Valoriser la culture locale et les actualités rurales","Évoquer la montagne Ilanjana","Créer une identité simple, élégante et reconnaissable"]},
 {t:"TEAM 305",c:"Branding",s:"Concept",d:"Marque de vêtements inspirée de l’identité locale d’Ambohimahasoa.",g:["Développer une identité de marque","Concevoir des modèles de T-shirts et des logos","Bâtir une présence commerciale sur Facebook"]},
 {t:"DR Creative Studio",c:"Branding",s:"Concept de marque personnelle",d:"Univers de marque pour présenter mes créations en design graphique.",g:["Présenter mes créations","Construire mon image professionnelle","Proposer progressivement des services de design"]},
-{t:"Messinah Raya Business",c:"Communication digitale",s:"Réalisation publiée",d:"Contenus pour une page Facebook de friperie et d’articles de décoration.",g:["Publications et textes publicitaires","Présentation des nouveaux arrivages","Relation client et visibilité de la page"]}];
-var box=document.getElementById("projects"),fb=document.querySelector(".filters"),cur="Tous";
+{t:"Messinah Raya Business",c:"Réseaux sociaux",s:"Réalisation publiée",d:"Contenus pour une page Facebook de friperie et d’articles de décoration.",g:["Publications et textes publicitaires","Présentation des nouveaux arrivages","Relation client et visibilité de la page"]}];
+var box=document.getElementById("projects"),fb=document.querySelector(".filters"),cur="Tous",cl=[];
+function fd(v){var d=new Date(v);return isNaN(d)?"":d.toLocaleDateString("fr-FR",{month:"long",year:"numeric"})}
 function esc(x){return x.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function draw(){var cs=[];P.forEach(function(p){if(cs.indexOf(p.c)<0)cs.push(p.c)});if(cur!=="Tous"&&cs.indexOf(cur)<0)cur="Tous";
-var l=P.filter(function(p){return cur==="Tous"||p.c===cur});
-box.innerHTML=l.length?l.map(function(p){var i=P.indexOf(p);return '<article class="pc"><button type="button" class="pimg" data-i="'+i+'" aria-label="Découvrir le projet '+esc(p.t)+'">'+(p.i?'<img class="slot" loading="lazy" decoding="async" alt="Visuel du projet '+esc(p.t)+'" src="'+esc(p.i)+'">':'<div class="slot">Visuel à venir</div>')+'</button><div class="pb">'+(p.s?'<span class="tag'+(p.s==="Réalisation publiée"?"":" l")+'">'+esc(p.s)+'</span>':'')+'<h3>'+esc(p.t)+'</h3><p class="mute">'+esc(p.c)+'. '+esc(p.d)+'</p>'+((p.o&&p.o.length)?'<ul class="tools">'+p.o.map(function(t){return"<li>"+esc(t)+"</li>"}).join("")+'</ul>':'')+'<button class="btn" type="button" data-i="'+i+'">Découvrir le projet</button></div></article>'}).join(""):'<div class="empty">Aucun projet dans cette catégorie pour le moment. De nouvelles réalisations seront ajoutées au fil de mon apprentissage.</div>';
+var l=P.filter(function(p){return cur==="Tous"||p.c===cur});cl=l.map(function(p){return P.indexOf(p)});
+box.innerHTML=l.length?l.map(function(p){var i=P.indexOf(p);return '<article class="pc"><button type="button" class="pimg" data-i="'+i+'" aria-label="Découvrir le projet '+esc(p.t)+'">'+(p.i?'<img class="slot" loading="lazy" decoding="async" alt="Visuel du projet '+esc(p.t)+'" src="'+esc(p.i)+'">':'<div class="slot">Visuel à venir</div>')+'</button><div class="pb">'+(p.s?'<span class="tag'+(p.s==="Réalisation publiée"?"":" l")+'">'+esc(p.s)+'</span>':'')+(p.r&&fd(p.r)?' <span class="mute dt">'+fd(p.r)+'</span>':'')+'<h3>'+esc(p.t)+'</h3><p class="mute">'+esc(p.c)+'. '+esc(p.d)+'</p>'+((p.o&&p.o.length)?'<ul class="tools">'+p.o.map(function(t){return"<li>"+esc(t)+"</li>"}).join("")+'</ul>':'')+'<button class="btn" type="button" data-i="'+i+'">Découvrir le projet</button></div></article>'}).join(""):'<div class="empty">Aucun projet dans cette catégorie pour le moment. De nouvelles réalisations seront ajoutées au fil de mon apprentissage.</div>';
 fb.innerHTML=(cs.length>1?["Tous"].concat(cs):[]).map(function(f){var n=f==="Tous"?P.length:P.filter(function(p){return p.c===f}).length;return '<button type="button" aria-pressed="'+(f===cur)+'" data-f="'+esc(f)+'">'+esc(f)+' ('+n+')</button>'}).join("")}
 draw();
 fb.onclick=function(e){var b=e.target.closest("button");if(b){cur=b.dataset.f;draw()}};
-var dlg=document.getElementById("dlg");
-box.onclick=function(e){var b=e.target.closest("[data-i]");if(!b)return;var p=P[b.dataset.i];
-document.getElementById("dt").textContent=p.t;document.getElementById("ds").textContent=p.c+", "+p.s;document.getElementById("dd").textContent=p.d;
-document.getElementById("dg").innerHTML=p.g.map(function(x){return "<li>"+esc(x)+"</li>"}).join("");var gl=document.getElementById("gal");gl.innerHTML=(p.gal||[]).map(function(x){return '<img loading="lazy" alt="'+esc(x.a)+'" src="'+esc(x.u)+'">'}).join("");var du=document.getElementById("du");du.hidden=!p.u;if(p.u)du.href=p.u;dlg.showModal()};
-document.getElementById("dx").onclick=function(){dlg.close()};
-dlg.onclick=function(e){if(e.target===dlg)dlg.close()};
+var dlg=document.getElementById("dlg"),lb=document.getElementById("lb"),lbi=document.getElementById("lbi"),dc=document.getElementById("dc");
+function openP(i){var p=P[i];dlg.dataset.i=i;document.getElementById("dt").textContent=p.t;document.getElementById("ds").textContent=p.c+(p.s?", "+p.s:"")+(p.r&&fd(p.r)?" · "+fd(p.r):"");document.getElementById("dd").textContent=p.d;
+document.getElementById("dg").innerHTML=p.g.map(function(x){return "<li>"+esc(x)+"</li>"}).join("");dc.hidden=!p.i;if(p.i){dc.src=p.i;dc.alt="Visuel du projet "+p.t}
+document.getElementById("gal").innerHTML=(p.gal||[]).map(function(x){return '<img loading="lazy" alt="'+esc(x.a)+'" src="'+esc(x.u)+'">'}).join("");var du=document.getElementById("du");du.hidden=!p.u;if(p.u)du.href=p.u;
+var m=cl.length<2;document.getElementById("dp").hidden=m;document.getElementById("dn").hidden=m;dlg.scrollTop=0;if(!dlg.open)dlg.showModal()}
+function step(d){var k=cl.indexOf(+dlg.dataset.i);if(k<0||cl.length<2)return;openP(cl[(k+d+cl.length)%cl.length])}
+box.onclick=function(e){var b=e.target.closest("[data-i]");if(b)openP(+b.dataset.i)};
+document.getElementById("dx").onclick=function(){dlg.close()};document.getElementById("dp").onclick=function(){step(-1)};document.getElementById("dn").onclick=function(){step(1)};
+dlg.addEventListener("click",function(e){if(e.target===dlg)return dlg.close();var im=e.target.closest("img");if(im&&im.src){lbi.src=im.src;lbi.alt=im.alt;lb.showModal()}});
+lb.onclick=function(){lb.close()};
+addEventListener("keydown",function(e){if(!dlg.open||lb.open)return;if(e.key==="ArrowRight")step(1);if(e.key==="ArrowLeft")step(-1)});
 var links=[].slice.call(document.querySelectorAll("#nav a")),io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){var on=a.getAttribute("href")==="#"+en.target.id;a.classList.toggle("on",on);if(on)a.scrollIntoView({inline:"center",block:"nearest"})})}})},{rootMargin:"-40% 0px -55% 0px"});
 document.querySelectorAll("main section").forEach(function(s){io.observe(s)});
 var up=document.getElementById("top");addEventListener("scroll",function(){up.classList.toggle("show",scrollY>600)},{passive:true});
@@ -202,16 +233,25 @@ function safe(u){return /^https?:\/\//.test(u||"")?u:""}
 (function(){try{if(navigator.doNotTrack==="1"||sessionStorage.getItem("pv"))return;sessionStorage.setItem("pv","1");var v=localStorage.getItem("vid");if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem("vid",v)}var rf="";try{rf=document.referrer?new URL(document.referrer).hostname.slice(0,100):""}catch(e){}if(rf===location.hostname)rf="";api("page_views",{method:"POST",headers:{Prefer:"return=minimal"},body:JSON.stringify({path:"/",referrer:rf||null,device:/Mobi|Android|iPhone/i.test(navigator.userAgent)?"mobile":"desktop",visitor:v})}).catch(function(){})}catch(e){}})();
 (async function(){
 function q(p){return api(p).then(function(r){return r.ok?r.json():[]}).catch(function(){return[]})}
-var R=await Promise.all([q("profile?select=intro&limit=1"),q("skills?select=*&is_active=eq.true&order=sort_order"),q("timeline_entries?select=*&order=sort_order"),q("projects?select=*&status=eq.publie&order=sort_order"),q("project_images?select=*&order=sort_order"),q("certifications?select=*&is_published=eq.true&order=obtained_on.desc")]);
-var pr=R[0][0],sk=R[1],tl=R[2],pj=R[3],im=R[4],ce=R[5];
+var R=await Promise.all([q("profile?select=intro,photo_path,email,phone,whatsapp,facebook_url,linkedin_url&limit=1"),q("skills?select=*&is_active=eq.true&order=sort_order"),q("timeline_entries?select=*&order=sort_order"),q("projects?select=*&status=eq.publie&order=sort_order"),q("project_images?select=*&order=sort_order"),q("certifications?select=*&is_published=eq.true&order=obtained_on.desc"),q("profile?select=brand_logo_path,cv_path&limit=1")]);
+var pr=R[0][0],px=R[6][0],sk=R[1],tl=R[2],pj=R[3],im=R[4],ce=R[5];
 if(pr&&pr.intro)document.querySelector(".hero .lead").textContent=pr.intro;
+if(pr&&pr.photo_path)document.querySelector(".photo").src=pub("projects",pr.photo_path);
+if(px&&px.brand_logo_path)document.getElementById("bimg").src=pub("projects",px.brand_logo_path);
+if(px&&px.cv_path){var cv=document.getElementById("cv");cv.href=pub("documents",px.cv_path);cv.target="_blank";cv.rel="noopener"}
+function setC(k,h,t){var a=document.querySelector('[data-c="'+k+'"]');if(!a||!h)return;a.href=h;if(t)a.querySelector(".t").textContent=t}
+if(pr){if(pr.email&&/^[^\s@]+@[^\s@]+$/.test(pr.email))setC("email","mailto:"+pr.email+"?subject=Discutons%20de%20votre%20projet",pr.email);
+if(pr.phone){var tn=pr.phone.replace(/[^\d+]/g,"");if(tn)setC("phone","tel:"+tn,pr.phone)}
+if(pr.whatsapp){var w=safe(pr.whatsapp)||(function(){var d=pr.whatsapp.replace(/\D/g,"");if(d.charAt(0)==="0")d="261"+d.slice(1);return d?"https://wa.me/"+d:""})();setC("whatsapp",w,/^https?:/.test(pr.whatsapp)?"":pr.whatsapp);if(w)document.querySelector('[data-c="whatsapp"] small').textContent="Message direct"}
+setC("facebook",safe(pr.facebook_url));setC("linkedin",safe(pr.linkedin_url))}
+
 var CAT={design:"Design graphique",communication:"Communication digitale",informatique:"Informatique et outils",ia:"Intelligence artificielle"},LV={bases:"bases",pratique:"pratiqué",en_apprentissage:"en apprentissage",avance:"avancé"};
 if(sk.length){var g={};sk.forEach(function(x){(g[x.category]=g[x.category]||[]).push(x)});
 document.querySelector("#competences .grid").innerHTML=Object.keys(CAT).filter(function(k){return g[k]}).map(function(k){return '<div class="card sk"><h3>'+CAT[k]+'</h3><ul>'+g[k].map(function(x){return '<li>'+esc(x.name)+(x.level?' <span class="tag'+(x.level==="en_apprentissage"?" l":"")+'">'+LV[x.level]+'</span>':'')+(x.description?'<br>'+esc(x.description):'')+'</li>'}).join("")+'</ul></div>'}).join("")}
 if(tl.length){var KD={formation:"Formation",stage:"Stage",experience:"Expérience",autodidacte:"Autodidacte",certification:"Certification"};
 document.querySelector("#parcours .tl").innerHTML=tl.map(function(x){var a=x.start_date&&x.start_date.slice(0,4),b=x.end_date&&x.end_date.slice(0,4),l=a?(b?(a===b?a:a+"–"+b):"Depuis "+a):KD[x.kind]||"";return '<li><b>'+esc(l)+'</b><h3>'+esc(x.title)+'</h3><p>'+esc([x.organization,x.description].filter(Boolean).join(". "))+'</p></li>'}).join("")}
-if(pj.length){var C2={identite_visuelle:"Identité visuelle",design_graphique:"Design graphique",branding:"Branding",communication_digitale:"Communication digitale"},N2={concept:"Concept",projet_personnel:"Projet personnel",realisation_publiee:"Réalisation publiée"};
-P=pj.map(function(x){return{t:x.name,c:C2[x.category]||x.category,s:N2[x.nature]||"",d:x.description||"",o:x.tools||[],g:(x.tools||[]).map(function(t){return"Outil : "+t}),i:x.cover_path?pub("projects",x.cover_path):"",u:safe(x.external_url),gal:im.filter(function(y){return y.project_id===x.id}).map(function(y){return{u:pub("projects",y.file_path),a:y.alt_text||x.name}})}});draw()}
+if(pj.length){var C2={identite_visuelle:"Logos & Identité visuelle",design_graphique:"Affiches & Flyers",branding:"Branding",communication_digitale:"Réseaux sociaux"},N2={concept:"Concept",projet_personnel:"Projet personnel",realisation_publiee:"Réalisation publiée"};
+P=pj.map(function(x){return{t:x.name,c:C2[x.category]||x.category,s:N2[x.nature]||"",d:x.description||"",o:x.tools||[],r:x.realized_on||"",g:(x.tools||[]).map(function(t){return"Outil : "+t}),i:x.cover_path?pub("projects",x.cover_path):"",u:safe(x.external_url),gal:im.filter(function(y){return y.project_id===x.id}).map(function(y){return{u:pub("projects",y.file_path),a:y.alt_text||x.name}})}});draw()}
 if(ce.length){document.querySelector("#certifications .wrap").innerHTML='<h2>Certifications</h2>'+ce.map(function(x){var d=x.obtained_on?new Date(x.obtained_on).toLocaleDateString("fr-FR",{day:"numeric",month:"long",year:"numeric"}):"";var rows=[["Organisme",x.issuer],["Durée",x.duration_hours?x.duration_hours+" heures":""],["Résultat",x.result],["Date",d],["Référence",x.reference_number]].filter(function(r){return r[1]}).map(function(r){return'<dt>'+r[0]+'</dt><dd>'+esc(String(r[1]))+'</dd>'}).join("");return'<div class="card cert" style="max-width:640px;margin-bottom:18px"><h3>'+esc(x.name)+'</h3><dl>'+rows+'</dl><div class="btns" style="margin:0">'+(safe(x.verify_url)?'<a class="btn main" href="'+esc(safe(x.verify_url))+'" target="_blank" rel="noopener">Vérifier l’attestation</a>':'')+(x.document_path?'<a class="btn" href="'+esc(pub("documents",x.document_path))+'" target="_blank" rel="noopener">Consulter le document</a>':'')+'</div></div>'}).join("")}
 })();
 </script>
