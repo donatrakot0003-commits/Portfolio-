@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://donatrakot0003-commits.github.io/Portfolio-/sitemap.xml
+Sitemap: https://donat-1.github.io/sitemap.xml
